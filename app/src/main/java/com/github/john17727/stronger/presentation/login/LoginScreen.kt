@@ -2,26 +2,35 @@ package com.github.john17727.stronger.presentation.login
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowForwardIos
+import androidx.compose.material.icons.rounded.Visibility
+import androidx.compose.material.icons.rounded.VisibilityOff
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.github.john17727.stronger.R
+import com.github.john17727.stronger.presentation.components.ElevatedOutlinedTextField
+import com.github.john17727.stronger.presentation.components.ElevatedPasswordTextField
 import com.github.john17727.stronger.presentation.components.TextToggleButton
-import com.github.john17727.stronger.presentation.ui.theme.StrongerTheme
 
+@ExperimentalComposeUiApi
 @Composable
 fun LoginScreen(
     navController: NavController,
@@ -43,22 +52,36 @@ fun LoginScreen(
                 style = MaterialTheme.typography.h3,
                 modifier = Modifier.fillMaxWidth()
             )
-            OutlinedTextField(
+            val focusRequester = remember { FocusRequester() }
+            val keyboardController = LocalSoftwareKeyboardController.current
+            ElevatedOutlinedTextField(
                 value = viewModel.usernameText.value,
                 onValueChange = {
                     viewModel.setUsernameText(it)
                 },
-                label = { Text("Username") },
+                placeholder = { Text("Username/Email") },
+                focusedElevation = 6.dp,
+                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
+                keyboardActions = KeyboardActions(onNext = { focusRequester.requestFocus() }),
                 modifier = Modifier.fillMaxWidth()
             )
             Spacer(modifier = Modifier.height(8.dp))
-            OutlinedTextField(
+            ElevatedPasswordTextField(
                 value = viewModel.passwordText.value,
                 onValueChange = {
                     viewModel.setPasswordText(it)
                 },
-                label = { Text("Password") },
-                modifier = Modifier.fillMaxWidth()
+                placeholder = { Text("Password") },
+                focusedElevation = 6.dp,
+                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
+                keyboardActions = KeyboardActions(
+                    onDone = { keyboardController?.hide() }
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .focusRequester(focusRequester),
+                visibleIcon = Icons.Rounded.Visibility,
+                invisibleIcon = Icons.Rounded.VisibilityOff
             )
             Spacer(modifier = Modifier.height(8.dp))
             Button(
