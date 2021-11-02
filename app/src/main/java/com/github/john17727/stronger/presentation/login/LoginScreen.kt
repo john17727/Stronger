@@ -15,18 +15,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.github.john17727.stronger.R
 import com.github.john17727.stronger.presentation.components.TextToggleButton
 import com.github.john17727.stronger.presentation.ui.theme.StrongerTheme
 
 @Composable
-fun LoginScreen(navController: NavController) {
-    Content()
-}
-
-@Composable
-fun Content() {
+fun LoginScreen(
+    navController: NavController,
+    viewModel: LoginViewModel = hiltViewModel()
+) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -44,15 +44,19 @@ fun Content() {
                 modifier = Modifier.fillMaxWidth()
             )
             OutlinedTextField(
-                value = "",
-                onValueChange = {},
+                value = viewModel.usernameText.value,
+                onValueChange = {
+                    viewModel.setUsernameText(it)
+                },
                 label = { Text("Username") },
                 modifier = Modifier.fillMaxWidth()
             )
             Spacer(modifier = Modifier.height(8.dp))
             OutlinedTextField(
-                value = "",
-                onValueChange = {},
+                value = viewModel.passwordText.value,
+                onValueChange = {
+                    viewModel.setPasswordText(it)
+                },
                 label = { Text("Password") },
                 modifier = Modifier.fillMaxWidth()
             )
@@ -112,13 +116,5 @@ fun Content() {
                 }
             }
         }
-    }
-}
-
-@Preview
-@Composable
-fun LoginScreenPreview() {
-    StrongerTheme {
-        Content()
     }
 }

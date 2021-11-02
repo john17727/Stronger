@@ -3,6 +3,7 @@
     package="com.github.john17727.stronger">
 
     <application
+        android:name=".presentation.Stronger"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
