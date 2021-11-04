@@ -4,9 +4,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Visibility
-import androidx.compose.material.icons.rounded.VisibilityOff
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
@@ -32,22 +29,18 @@ fun ElevatedOutlinedTextField(
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     visualTransformation: VisualTransformation = VisualTransformation.None,
-    leadingIcon: @Composable (() -> Unit)? = null,
+    leadingIcon: ImageVector? = null,
     trailingIcon: @Composable (() -> Unit)? = null
 ) {
-    val fieldElevation = remember {
-        mutableStateOf(unfocusedElevation)
+    var isFocused by remember {
+        mutableStateOf(false)
     }
     Surface(
-        elevation = fieldElevation.value,
+        elevation = if (isFocused) focusedElevation else unfocusedElevation,
         color = MaterialTheme.colors.background,
         shape = RoundedCornerShape(12.dp),
         modifier = Modifier.onFocusChanged {
-            fieldElevation.value = if (it.isFocused) {
-                focusedElevation
-            } else {
-                unfocusedElevation
-            }
+            isFocused = it.isFocused
         }
     ) {
         OutlinedTextField(
@@ -58,7 +51,15 @@ fun ElevatedOutlinedTextField(
             keyboardActions = keyboardActions,
             keyboardOptions = keyboardOptions,
             modifier = modifier,
-            leadingIcon = leadingIcon,
+            leadingIcon = leadingIcon?.let {
+                {
+                    Icon(
+                        imageVector = leadingIcon,
+                        contentDescription = "icon",
+                        tint = MaterialTheme.colors.onBackground
+                    )
+                }
+            },
             trailingIcon = trailingIcon,
             visualTransformation = visualTransformation
         )
@@ -75,6 +76,7 @@ fun ElevatedPasswordTextField(
     focusedElevation: Dp = 4.dp,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
+    leadingIcon: ImageVector? = null,
     visibleIcon: ImageVector,
     invisibleIcon: ImageVector
 ) {
@@ -103,6 +105,7 @@ fun ElevatedPasswordTextField(
                     contentDescription = "Password Visibility"
                 )
             }
-        }
+        },
+        leadingIcon = leadingIcon
     )
 }

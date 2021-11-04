@@ -1,11 +1,13 @@
 package com.github.john17727.stronger.presentation.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.github.john17727.stronger.presentation.login.LoginScreen
+import com.github.john17727.stronger.presentation.login.AuthScreen
 
+@ExperimentalComposeUiApi
 @Composable
 fun Navigation() {
     val navController = rememberNavController()
@@ -14,7 +16,7 @@ fun Navigation() {
         startDestination = Screen.Login.route
     ) {
         composable(Screen.Login.route) {
-            LoginScreen(navController = navController)
+            AuthScreen(navController = navController)
         }
     }
 }

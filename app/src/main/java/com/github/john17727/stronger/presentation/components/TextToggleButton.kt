@@ -3,10 +3,7 @@ package com.github.john17727.stronger.presentation.components
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Text
-import androidx.compose.material.TextButton
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -15,6 +12,7 @@ import androidx.compose.ui.unit.dp
 fun TextToggleButton(
     isSelected: Boolean,
     onClick: (Boolean) -> Unit,
+    colors: ButtonColors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.background),
     content: @Composable RowScope.() -> Unit
 ) {
 
@@ -25,7 +23,8 @@ fun TextToggleButton(
             },
             shape = RoundedCornerShape(16.dp),
             content = content,
-            elevation = ButtonDefaults.elevation(defaultElevation = 4.dp)
+            elevation = ButtonDefaults.elevation(defaultElevation = 4.dp),
+            colors = colors
         )
     } else {
         TextButton(
