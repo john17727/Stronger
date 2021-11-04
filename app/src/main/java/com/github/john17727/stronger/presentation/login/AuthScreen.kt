@@ -111,15 +111,15 @@ fun LoginScreen(viewModel: LoginViewModel) {
         )
         Spacer(modifier = Modifier.height(8.dp))
         ElevatedOutlinedTextField(
-            value = viewModel.usernameText.value,
+            value = viewModel.emailText.value,
             onValueChange = {
-                viewModel.setUsernameText(it)
+                viewModel.setEmailText(it)
             },
             placeholder = { Text("Email") },
             focusedElevation = 6.dp,
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
             keyboardActions = KeyboardActions(onNext = { focusRequester.requestFocus() }),
-            leadingIcon = Icons.Rounded.Person,
+            leadingIcon = Icons.Rounded.Email,
             modifier = Modifier.fillMaxWidth()
         )
         Spacer(modifier = Modifier.height(8.dp))
@@ -181,6 +181,7 @@ fun RegisterScreen(viewModel: LoginViewModel) {
             focusedElevation = 6.dp,
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
             keyboardActions = KeyboardActions(onNext = { focusRequester.requestFocus() }),
+            leadingIcon = Icons.Rounded.Person,
             modifier = Modifier.fillMaxWidth()
         )
         Spacer(modifier = Modifier.height(8.dp))
@@ -193,18 +194,20 @@ fun RegisterScreen(viewModel: LoginViewModel) {
             focusedElevation = 6.dp,
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
             keyboardActions = KeyboardActions(onNext = { focusRequester.requestFocus() }),
+            leadingIcon = Icons.Rounded.People,
             modifier = Modifier.fillMaxWidth()
         )
         Spacer(modifier = Modifier.height(8.dp))
         ElevatedOutlinedTextField(
-            value = viewModel.usernameText.value,
+            value = viewModel.emailText.value,
             onValueChange = {
-                viewModel.setUsernameText(it)
+                viewModel.setEmailText(it)
             },
             placeholder = { Text("Email") },
             focusedElevation = 6.dp,
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
             keyboardActions = KeyboardActions(onNext = { focusRequester.requestFocus() }),
+            leadingIcon = Icons.Rounded.Email,
             modifier = Modifier.fillMaxWidth()
         )
         Spacer(modifier = Modifier.height(8.dp))
@@ -223,6 +226,7 @@ fun RegisterScreen(viewModel: LoginViewModel) {
                 .fillMaxWidth()
                 .focusRequester(focusRequester),
             visibleIcon = Icons.Rounded.Visibility,
+            leadingIcon = Icons.Rounded.VpnKey,
             invisibleIcon = Icons.Rounded.VisibilityOff
         )
         Spacer(modifier = Modifier.height(8.dp))
