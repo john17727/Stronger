@@ -1,4 +1,4 @@
-package com.github.john17727.stronger.presentation.login
+package com.github.john17727.stronger.presentation.auth
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -27,6 +27,7 @@ import com.github.john17727.stronger.R
 import com.github.john17727.stronger.presentation.components.ElevatedOutlinedTextField
 import com.github.john17727.stronger.presentation.components.ElevatedPasswordTextField
 import com.github.john17727.stronger.presentation.components.TextToggleButton
+import com.github.john17727.stronger.presentation.navigation.Screen
 
 @ExperimentalComposeUiApi
 @Composable
@@ -44,7 +45,7 @@ fun AuthScreen(
         }
 
         if (isPrimaryButtonSelected) {
-            LoginScreen(viewModel = viewModel)
+            LoginScreen(viewModel = viewModel, navController)
         } else {
             RegisterScreen(viewModel = viewModel)
         }
@@ -95,7 +96,7 @@ fun AuthScreen(
 
 @ExperimentalComposeUiApi
 @Composable
-fun LoginScreen(viewModel: LoginViewModel) {
+fun LoginScreen(viewModel: LoginViewModel, navController: NavController) {
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.End,
@@ -143,7 +144,7 @@ fun LoginScreen(viewModel: LoginViewModel) {
         )
         Spacer(modifier = Modifier.height(8.dp))
         Button(
-            onClick = { /*TODO*/ },
+            onClick = { navController.navigate(Screen.Activity.route) },
             elevation = ButtonDefaults.elevation(defaultElevation = 0.dp),
         ) {
             Icon(

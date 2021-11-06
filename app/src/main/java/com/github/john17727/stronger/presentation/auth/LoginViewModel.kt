@@ -1,4 +1,4 @@
-package com.github.john17727.stronger.presentation.login
+package com.github.john17727.stronger.presentation.auth
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
