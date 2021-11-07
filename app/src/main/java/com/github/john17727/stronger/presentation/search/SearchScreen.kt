@@ -6,13 +6,10 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
-import com.github.john17727.stronger.presentation.components.FrontPageScaffold
 
 @Composable
 fun SearchScreen(navController: NavController) {
-    FrontPageScaffold(navController = navController) {
-        Box(modifier = Modifier.fillMaxSize()) {
-            Text(text = "Workout")
-        }
+    Box(modifier = Modifier.fillMaxSize()) {
+        Text(text = "Search")
     }
 }
