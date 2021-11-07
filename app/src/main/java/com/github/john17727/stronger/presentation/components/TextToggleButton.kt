@@ -1,5 +1,6 @@
 package com.github.john17727.stronger.presentation.components
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -12,7 +13,7 @@ import androidx.compose.ui.unit.dp
 fun TextToggleButton(
     isSelected: Boolean,
     onClick: (Boolean) -> Unit,
-    colors: ButtonColors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.background),
+    colors: ButtonColors = lightToPrimaryDark(),
     content: @Composable RowScope.() -> Unit
 ) {
 
@@ -35,5 +36,14 @@ fun TextToggleButton(
             content = content,
             modifier = Modifier.padding(horizontal = 8.dp)
         )
+    }
+}
+
+@Composable
+fun lightToPrimaryDark(): ButtonColors {
+    return if (isSystemInDarkTheme()) {
+        ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.primary)
+    } else {
+        ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.background)
     }
 }
